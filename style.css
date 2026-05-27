@@ -1,0 +1,203 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  
+  :root {
+    --bg-primary:  #1a1a1a;
+    --bg-panel:    #2c3e50;
+    --accent:      #c300ff;
+    --accent-dim:  #8a00b3;
+    --text:        #ffffff;
+    --cell-border: rgba(255, 255, 255, 0.06);
+    --cell-size:   20px; /* overridden by JS */
+  }
+  
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    position: relative;
+  }
+  
+  /* ── Info Bar ── */
+  .infos {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--bg-panel);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    padding: 10px 24px;
+    flex-shrink: 0;
+  }
+  
+  .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    min-width: 70px;
+  }
+  
+  .info h3 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .info span {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+  }
+  
+  /* ── Controls ── */
+  .controls {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  
+  button {
+    padding: 9px 22px;
+    background-color: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    transition: background 0.15s, transform 0.1s;
+  }
+  
+  button:hover:not(:disabled) {
+    background-color: var(--accent-dim);
+    transform: translateY(-1px);
+  }
+  
+  button:active:not(:disabled) {
+    transform: translateY(0);
+  }
+  
+  button:disabled {
+    background-color: #444;
+    color: #888;
+    cursor: not-allowed;
+  }
+  
+  /* ── Board ── */
+  .board-wrap {
+    flex: 1 1 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .board {
+    /* size set dynamically via --cell-size in JS */
+    width:  calc(var(--cell-size) * 20);
+    height: calc(var(--cell-size) * 20);
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    background-color: #0a0a0a;
+    display: grid;
+    grid-template-columns: repeat(20, var(--cell-size));
+    grid-template-rows:    repeat(20, var(--cell-size));
+    flex-shrink: 0;
+  }
+  
+  .block {
+    width:  var(--cell-size);
+    height: var(--cell-size);
+    border: 1px solid var(--cell-border);
+  }
+  
+  .snake-head {
+    background-color: #e040fb;
+    border-radius: 3px;
+  }
+  
+  .snake-body {
+    background-color: var(--accent);
+    border-radius: 2px;
+  }
+  
+  .food {
+    border-radius: 50%;
+  }
+  
+  /* ── Modal ── */
+  .modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.78);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  
+  .modal.hidden {
+    display: none;
+  }
+  
+  .modal-box {
+    background: var(--bg-panel);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    padding: 36px 48px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .modal-box h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  
+  .modal-box p {
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .modal-box button {
+    margin-top: 8px;
+    padding: 12px 30px;
+    font-size: 15px;
+  }
